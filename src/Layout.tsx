@@ -1,9 +1,12 @@
 import { Outlet } from "react-router-dom";
+import PlaylistCreator from "./components/GeneratePlaylist";
 
 const Layout = () => {
   return (
     <main>
-      <header></header>
+      <header>
+        <PlaylistCreator />
+      </header>
       <Outlet />
     </main>
   );
