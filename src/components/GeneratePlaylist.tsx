@@ -5,61 +5,55 @@ import {
   RecommendationsResponse,
   SavedTrack,
   Scopes,
-  SpotifyApi,
   Track,
   TrackItem,
+  User,
 } from "@spotify/web-api-ts-sdk";
-import { User } from "next-auth";
 import { useEffect, useState } from "react";
 import { useSpotify } from "../hooks/useSpotify";
 
 function PlaylistCreator() {
-  const sdk = useSpotify(
+  const { sdk, initialized } = useSpotify(
     import.meta.env.VITE_SPOTIFY_CLIENT_ID,
     import.meta.env.VITE_REDIRECT_TARGET,
     Scopes.all
   );
 
-  return sdk ? <PlaylistGeneration sdk={sdk} /> : <></>;
-}
-
-function PlaylistGeneration({ sdk }: { sdk: SpotifyApi }) {
-  const [user, setUser] = useState<User>();
-
-  const [savedTracks, setSavedTracks] = useState<Page<SavedTrack>>();
+  const [user, setUser] = useState<User | null>(null);
+  const [savedTracks, setSavedTracks] = useState<Page<SavedTrack> | null>(null);
   const [trackId, setTrackId] = useState<string[]>([]);
   const [albumId, setAlbumId] = useState<string[]>([]);
-
   const [audioFeatures, setAudioFeatures] = useState<AudioFeatures[]>([]);
   const [selectedTracks, setSelectedTracks] = useState<Track[]>([]);
-
   const [recommendationsResponse, setRecommendationsResponse] =
-    useState<RecommendationsResponse>();
-
-  const [createdPlaylist, setCreatedPlaylist] = useState<Playlist<TrackItem>>();
+    useState<RecommendationsResponse | null>(null);
+  const [createdPlaylist, setCreatedPlaylist] =
+    useState<Playlist<TrackItem> | null>(null);
   const [trackUris, setTrackUris] = useState<string[]>([]);
 
   useEffect(() => {
-    (async () => {
-      const user = await sdk.currentUser.profile();
-      setUser(user);
-      const userTracks = await sdk.currentUser.tracks.savedTracks(2, 3, "SE");
-      setSavedTracks(userTracks);
+    if (initialized && sdk) {
+      (async () => {
+        const currentUser = await sdk.currentUser.profile();
+        setUser(currentUser);
+        const userTracks = await sdk.currentUser.tracks.savedTracks(2, 3, "SE");
+        setSavedTracks(userTracks);
 
-      const trackIdArray = userTracks.items.map(
-        (trackItem) => trackItem.track.id
-      );
-      setTrackId(trackIdArray);
+        const trackIdArray = userTracks.items.map(
+          (trackItem) => trackItem.track.id
+        );
+        setTrackId(trackIdArray);
 
-      const albumIdArray = userTracks.items.map(
-        (trackItem) => trackItem.track.album.id
-      );
-      setAlbumId(albumIdArray);
+        const albumIdArray = userTracks.items.map(
+          (trackItem) => trackItem.track.album.id
+        );
+        setAlbumId(albumIdArray);
 
-      console.log(trackId);
-      console.log(albumId);
-    })();
-  }, [sdk]);
+        console.log(trackId);
+        console.log(albumId);
+      })();
+    }
+  }, [initialized, sdk]);
 
   const request = {
     seed_artists: albumId,
@@ -67,8 +61,8 @@ function PlaylistGeneration({ sdk }: { sdk: SpotifyApi }) {
   };
 
   useEffect(() => {
-    (async () => {
-      if (trackId.length > 0) {
+    if (initialized && sdk && trackId.length > 0) {
+      (async () => {
         const trackInputs = await sdk.tracks.audioFeatures(
           trackId.map((id) => id.toString())
         );
@@ -84,17 +78,18 @@ function PlaylistGeneration({ sdk }: { sdk: SpotifyApi }) {
         if (trackUri) {
           setTrackUris(trackUri);
         }
-      }
-    })();
-  }, [trackId]);
+      })();
+    }
+  }, [initialized, sdk, trackId]);
 
   async function createPlaylist() {
-    const playlistRequest = {
-      name: "Made by jonas",
-      public: false,
-      description: "A playlist customized by me to you",
-    };
-    if (user?.id) {
+    if (user?.id && sdk && trackUris.length > 0) {
+      const playlistRequest = {
+        name: "Made by jonas",
+        public: false,
+        description: "A playlist customized by me to you",
+      };
+
       const createdPlaylist = await sdk.playlists.createPlaylist(
         user.id,
         playlistRequest
@@ -105,32 +100,34 @@ function PlaylistGeneration({ sdk }: { sdk: SpotifyApi }) {
   }
 
   async function addTrackToPlaylist(playlistId: string, uris: string[]) {
-    if (playlistId) {
+    if (sdk && playlistId) {
       await sdk.playlists.addItemsToPlaylist(playlistId, uris);
     }
   }
 
+  if (!initialized || !sdk) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <>
-      <main>
-        <div className="playlistContainer">
-          {recommendationsResponse?.tracks.map((track) => (
-            <div key={track.name} className="trackInfo">
-              <p>{track.name}</p>
-              <picture>
-                <img width={200} src={track.album.images[0].url} alt="" />
-              </picture>
-            </div>
-          ))}
-        </div>
-        <div className="generateContainer">
-          <h2>Time to vibe!</h2>
-          <button className="createPlaylistButton" onClick={createPlaylist}>
-            Create Playlist
-          </button>
-        </div>
-      </main>
-    </>
+    <main>
+      <div className="playlistContainer">
+        {recommendationsResponse?.tracks.map((track) => (
+          <div key={track.name} className="trackInfo">
+            <p>{track.name}</p>
+            <picture>
+              <img width={200} src={track.album.images[0].url} alt="" />
+            </picture>
+          </div>
+        ))}
+      </div>
+      <div className="generateContainer">
+        <h2>Time to vibe!</h2>
+        <button className="createPlaylistButton" onClick={createPlaylist}>
+          Create Playlist
+        </button>
+      </div>
+    </main>
   );
 }
 

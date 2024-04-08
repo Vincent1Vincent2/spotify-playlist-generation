@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom";
-import PlaylistCreator from "./components/GeneratePlaylist";
+import NavBar from "./components/Nav";
 
 const Layout = () => {
   return (
-    <main>
+    <>
       <header>
-        <PlaylistCreator />
+        <NavBar />
       </header>
-      <Outlet />
-    </main>
+
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 };
 

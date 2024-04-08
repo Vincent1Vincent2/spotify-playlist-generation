@@ -2,6 +2,7 @@ import {
   AuthorizationCodeWithPKCEStrategy,
   LocalStorageCachingStrategy,
   Scopes,
+  SdkOptions,
   SpotifyApi,
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useRef, useState } from "react";
@@ -10,7 +11,7 @@ export function useSpotify(
   clientId: string,
   redirectUrl: string,
   scopes: string[],
-  config?: any // You can specify the type of config here
+  config?: SdkOptions
 ) {
   const [sdk, setSdk] = useState<SpotifyApi | null>(null);
   const [initialized, setInitialized] = useState<boolean>(false);
