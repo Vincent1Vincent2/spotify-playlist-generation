@@ -1,15 +1,15 @@
 import {
   AuthorizationCodeWithPKCEStrategy,
-  InMemoryCachingStrategy,
   Scopes,
   SdkOptions,
   SpotifyApi,
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useRef, useState } from "react";
+import LocalStorageCachingStrategy from "../utils/cachingStratergy";
 
 export function useSpotify(
   clientId: "d4dc4ed96a9747cc95da42119237298b",
-  redirectUrl: "https://spotify-playlist-generation.vercel.app/",
+  redirectUrl: "https://spotify-playlist-generation.vercel.app/auth",
   scopes: string[],
   config?: SdkOptions
 ) {
@@ -18,10 +18,10 @@ export function useSpotify(
   const { current: activeScopes } = useRef(scopes);
 
   useEffect(() => {
-    const cachingStrategy = new InMemoryCachingStrategy();
+    const cachingStrategy = new LocalStorageCachingStrategy();
     const auth = new AuthorizationCodeWithPKCEStrategy(
       "d4dc4ed96a9747cc95da42119237298b",
-      "https://spotify-playlist-generation.vercel.app/",
+      "https://spotify-playlist-generation.vercel.app/auth",
       Scopes.all
     );
 
