@@ -43,11 +43,7 @@ export function useSpotify(
     initializeSdk();
 
     return () => {};
-  }, [
-    clientId,
-    "https://spotify-playlist-generation.vercel.app/api/auth/callback/spotify",
-    config,
-  ]);
+  }, [clientId, redirectUrl, config]);
 
   const reinitialize = () => {
     setInitialized(false);
