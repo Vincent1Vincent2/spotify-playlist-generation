@@ -9,6 +9,17 @@
   color: rgb(255, 251, 243);
 }
 
+a {
+  cursor: pointer;
+  border: solid 1px white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+}
+
+a:hover {
+  background-color: rgb(126, 70, 28);
+}
+
 button {
   cursor: pointer;
   border: solid 1px white;
@@ -16,11 +27,41 @@ button {
   border-radius: 10px;
 }
 
+button:hover {
+  background-color: rgb(77, 28, 28);
+}
+
 header {
   height: 5rem;
   padding: 1rem 2.5rem;
 }
 
+.landingPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80svh;
+  gap: 1rem;
+}
+
+.welcomeText {
+  font-size: clamp(1.5625rem, -4.0305rem + 25.5682vw, 10rem);
+}
+
+.description {
+  width: 350px;
+  text-align: center;
+  font-size: clamp(0.0625rem, -3.2105rem + 14.9621vw, 3rem);
+}
+.playlistLink {
+  margin-top: 3rem;
+  font-size: clamp(0.0625rem, -3.2105rem + 14.9621vw, 2.5rem);
+}
+
+.playlistLink:hover {
+  background-color: rgb(62, 93, 59);
+}
 .navItems {
   display: flex;
   justify-content: space-between;
@@ -29,7 +70,7 @@ header {
 }
 
 .navLink {
-  font-size: 1.2rem;
+  font-size: clamp(0.8rem, 0.336rem + 2.1212vw, 1.5rem);
 }
 
 .playlistContainer {
@@ -61,6 +102,10 @@ header {
   gap: 1rem;
 }
 
+.audioPlayButton:hover {
+  background-color: rgb(54, 54, 95);
+}
+
 .time {
   font-size: 1.2rem;
 }
@@ -68,4 +113,22 @@ header {
 .noPreview {
   padding: 1rem 0rem;
   font-size: 1.2rem;
+}
+
+.generateContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: clamp(0.0625rem, -3.2105rem + 14.9621vw, 3rem);
+  padding: 5rem 0rem;
+}
+
+.createPlaylistButton {
+  font-size: 1.6rem;
+}
+
+.createPlaylistButton:hover {
+  background-color: rgb(131, 119, 52);
 }
