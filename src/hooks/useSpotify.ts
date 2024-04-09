@@ -8,8 +8,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 export function useSpotify(
-  clientId: string,
-  redirectUrl: string,
+  clientId = "d4dc4ed96a9747cc95da42119237298b",
+  redirectUrl = "https://spotify-playlist-generation.vercel.app/",
   scopes: string[],
   config?: SdkOptions
 ) {
@@ -20,8 +20,8 @@ export function useSpotify(
   useEffect(() => {
     const cachingStrategy = new LocalStorageCachingStrategy();
     const auth = new AuthorizationCodeWithPKCEStrategy(
-      clientId,
-      redirectUrl,
+      "d4dc4ed96a9747cc95da42119237298b",
+      "https://spotify-playlist-generation.vercel.app/",
       Scopes.all
     );
     const internalSdk = new SpotifyApi(auth, { ...config, cachingStrategy });
