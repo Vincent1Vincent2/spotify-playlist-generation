@@ -114,15 +114,25 @@ function PlaylistCreator() {
     return <p>Loading...</p>;
   }
 
+  function newTracks() {
+    window.location.reload();
+  }
+
   return (
     <main>
       <PlaylistDisplay tracks={recommendationsResponse?.tracks || []} />
       <div className="generateContainer">
         <h2>Time to vibe!</h2>
 
-        <button className="createPlaylistButton" onClick={createPlaylist}>
-          Create Playlist
-        </button>
+        <div className="buttonContainer">
+          <button className="createPlaylistButton" onClick={createPlaylist}>
+            Create Playlist
+          </button>
+          <p>or</p>
+          <button className="createPlaylistButton" onClick={newTracks}>
+            Request new playlist
+          </button>
+        </div>
       </div>
     </main>
   );
