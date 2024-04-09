@@ -8,9 +8,14 @@ function LogOutButton() {
     Scopes.all
   );
 
+  function handleLogout() {
+    sdk?.logOut();
+    window.location.reload();
+  }
+
   return (
     <li>
-      <button className="logOut" onClick={() => sdk?.logOut()}>
+      <button className="logOut" onClick={() => handleLogout()}>
         Log out
       </button>
     </li>
