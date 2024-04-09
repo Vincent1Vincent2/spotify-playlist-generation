@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# React + TypeScript + Spotify API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a playlist generator that uses the Spotify API that gets saved tracks and generate a tailored playlist.
 
-Currently, two official plugins are available:
+<img src="./src/assets/playlistGenDemo.gif" width="400" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Gaining Access
 
-## Expanding the ESLint configuration
+If you are interested in using this app you'll need to contact me to get on the development list. Contact via vincent.ahlin99@gmail.com send full name and the mail connected to your spotify.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The app is currently in development and features like being able to select a mood is coming.
 
-- Configure the top-level `parserOptions` property like this:
+## Want to run on your own?
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+> To install use "npm i"
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Create a app on spotify developer site and get the client id as well as setting a Redirect URI.
+
+The Redirect URI will under development be the dev server
+
+- Create a .env file in the root of the project. Use this template:
+
+  > VITE_SPOTIFY_CLIENT_ID="YOUR_CLIENT_ID"
+  > VITE_REDIRECT_TARGET="http://localhost:\*\*\*\*/"
