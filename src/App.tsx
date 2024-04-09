@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Layout from "./Layout";
 import CreatedPlayList from "./components/CreatedPlaylist";
@@ -13,6 +13,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/playlist" element={<PlaylistCreator />} />
           <Route path="/playlist/:playlistId" element={<CreatedPlayList />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </BrowserRouter>
