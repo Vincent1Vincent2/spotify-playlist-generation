@@ -16,7 +16,7 @@ function LogOutButton() {
 
   return (
     <li>
-      <button className="logOut" onClick={() => handleLogout()}>
+      <button className="logOut navLink" onClick={() => handleLogout()}>
         Log out
       </button>
     </li>

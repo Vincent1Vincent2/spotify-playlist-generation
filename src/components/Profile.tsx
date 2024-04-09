@@ -45,7 +45,7 @@ function Profile() {
 
   return (
     <li>
-      <p>Hello {profile.display_name}!</p>
+      <p className="navLink">Hello {profile.display_name}!</p>
     </li>
   );
 }
