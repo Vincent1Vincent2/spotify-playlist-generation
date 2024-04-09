@@ -7,7 +7,7 @@ function NavBar() {
     <nav className="nav">
       <ul className="navItems">
         <li>
-          <Link to="/api/auth/callback/spotify/">Home</Link>
+          <Link to="/api/auth/callback/spotify">Home</Link>
         </li>
         <Profile />
         <LogOutButton />
