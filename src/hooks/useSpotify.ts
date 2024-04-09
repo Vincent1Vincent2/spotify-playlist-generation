@@ -8,8 +8,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 export function useSpotify(
-  clientId = "d4dc4ed96a9747cc95da42119237298b",
-  redirectUrl = "https://spotify-playlist-generation.vercel.app/",
+  clientId: "d4dc4ed96a9747cc95da42119237298b",
+  redirectUrl: "https://spotify-playlist-generation.vercel.app/",
   scopes: string[],
   config?: SdkOptions
 ) {
