@@ -25,7 +25,7 @@ export function useSpotify(
       Scopes.all
     );
     const internalSdk = new SpotifyApi(auth, { ...config, cachingStrategy });
-
+    console.log(activeScopes);
     const initializeSdk = async () => {
       try {
         const { authenticated } = await internalSdk.authenticate();

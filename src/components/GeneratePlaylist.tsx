@@ -30,7 +30,7 @@ function PlaylistCreator() {
   const [selectedTracks, setSelectedTracks] = useState<Track[]>([]);
   const [recommendationsResponse, setRecommendationsResponse] =
     useState<RecommendationsResponse | null>(null);
-  const [createdPlaylist, setCreatedPlaylist] =
+  const [createdPlaylists, setCreatedPlaylist] =
     useState<Playlist<TrackItem> | null>(null);
   const [trackUris, setTrackUris] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ function PlaylistCreator() {
         setUser(currentUser);
         const userTracks = await sdk.currentUser.tracks.savedTracks(2, 3, "SE");
         setSavedTracks(userTracks);
+        console.log(savedTracks);
 
         const trackIdArray = userTracks.items.map(
           (trackItem) => trackItem.track.id
@@ -75,6 +76,8 @@ function PlaylistCreator() {
         );
         setAudioFeatures(trackInputs);
         setSelectedTracks(trackData);
+        console.log(audioFeatures);
+        console.log(selectedTracks);
 
         const trackRecs = await sdk.recommendations.get(request);
         setRecommendationsResponse(trackRecs);
@@ -99,6 +102,8 @@ function PlaylistCreator() {
         playlistRequest
       );
       setCreatedPlaylist(createdPlaylist);
+      console.log(createdPlaylists);
+
       await addTrackToPlaylist(createdPlaylist.id, trackUris);
       navigate(`/playlist/${createdPlaylist.id}`);
     }
