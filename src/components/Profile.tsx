@@ -1,5 +1,5 @@
 import { Scopes, User } from "@spotify/web-api-ts-sdk";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSpotify } from "../hooks/useSpotify";
 
 function Profile() {
@@ -8,24 +8,27 @@ function Profile() {
     import.meta.env.VITE_REDIRECT_TARGET,
     Scopes.all
   );
-  const [profile, setProfile] = useState<User | null>(null);
+  const [profile, setProfile] = useState<User>();
+  const [hasProfileFetched, setHasProfileFetched] = useState(false);
+
+  const fetchUserProfile = useCallback(async () => {
+    try {
+      const user = await sdk?.currentUser.profile();
+      setProfile(user);
+      setHasProfileFetched(true);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  }, [sdk]);
 
   useEffect(() => {
-    if (initialized && sdk) {
-      const fetchUserProfile = async () => {
-        try {
-          const user = await sdk.currentUser.profile();
-          setProfile(user);
-        } catch (error) {
-          console.error("Error fetching user profile:", error);
-        }
-      };
+    if (initialized && sdk && !hasProfileFetched) {
       fetchUserProfile();
     } else if (!initialized && reinitialize) {
       // If initialization failed and reinitialization is requested, reinitialize the SDK
       reinitialize();
     }
-  }, [sdk, initialized, reinitialize]);
+  }, [initialized, sdk, fetchUserProfile, reinitialize, hasProfileFetched]);
 
   if (!initialized) {
     return <p>Loading...</p>;
