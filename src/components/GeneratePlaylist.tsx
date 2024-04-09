@@ -128,7 +128,7 @@ function PlaylistCreator() {
           <button className="createPlaylistButton" onClick={createPlaylist}>
             Create Playlist
           </button>
-          <p>or</p>
+          <p className="or">or</p>
           <button className="createPlaylistButton" onClick={newTracks}>
             Request new playlist
           </button>

@@ -136,6 +136,10 @@ header {
   gap: 1rem;
 }
 
+.or {
+  font-size: 2rem;
+}
+
 .createPlaylistButton:hover {
   background-color: rgb(131, 119, 52);
 }
