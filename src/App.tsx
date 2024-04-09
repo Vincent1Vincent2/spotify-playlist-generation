@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index path="/api/auth/callback/spotify" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/playlist" element={<PlaylistCreator />} />
           <Route path="/playlist/:playlistId" element={<CreatedPlayList />} />
         </Route>
