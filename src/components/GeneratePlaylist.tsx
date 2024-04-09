@@ -10,6 +10,7 @@ import {
   User,
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSpotify } from "../hooks/useSpotify";
 import "../index.css";
 import PlaylistDisplay from "./Playlist";
@@ -32,6 +33,7 @@ function PlaylistCreator() {
   const [createdPlaylist, setCreatedPlaylist] =
     useState<Playlist<TrackItem> | null>(null);
   const [trackUris, setTrackUris] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (initialized && sdk) {
@@ -98,6 +100,7 @@ function PlaylistCreator() {
       );
       setCreatedPlaylist(createdPlaylist);
       await addTrackToPlaylist(createdPlaylist.id, trackUris);
+      navigate(`/playlist/${createdPlaylist.id}`);
     }
   }
 
@@ -116,6 +119,7 @@ function PlaylistCreator() {
       <PlaylistDisplay tracks={recommendationsResponse?.tracks || []} />
       <div className="generateContainer">
         <h2>Time to vibe!</h2>
+
         <button className="createPlaylistButton" onClick={createPlaylist}>
           Create Playlist
         </button>
