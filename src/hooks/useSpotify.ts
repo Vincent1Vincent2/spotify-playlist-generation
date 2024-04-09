@@ -1,6 +1,6 @@
 import {
   AuthorizationCodeWithPKCEStrategy,
-  LocalStorageCachingStrategy,
+  InMemoryCachingStrategy,
   Scopes,
   SdkOptions,
   SpotifyApi,
@@ -18,13 +18,18 @@ export function useSpotify(
   const { current: activeScopes } = useRef(scopes);
 
   useEffect(() => {
-    const cachingStrategy = new LocalStorageCachingStrategy();
+    const cachingStrategy = new InMemoryCachingStrategy();
     const auth = new AuthorizationCodeWithPKCEStrategy(
       "d4dc4ed96a9747cc95da42119237298b",
       "https://spotify-playlist-generation.vercel.app/",
       Scopes.all
     );
-    const internalSdk = new SpotifyApi(auth, { ...config, cachingStrategy });
+
+    const internalSdk = new SpotifyApi(auth, {
+      ...config,
+
+      cachingStrategy,
+    });
     console.log(activeScopes);
     const initializeSdk = async () => {
       try {
