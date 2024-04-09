@@ -21,7 +21,7 @@ export function useSpotify(
     const cachingStrategy = new LocalStorageCachingStrategy();
     const auth = new AuthorizationCodeWithPKCEStrategy(
       clientId,
-      redirectUrl,
+      "https://spotify-playlist-generation.vercel.app/",
       Scopes.all
     );
     const internalSdk = new SpotifyApi(auth, { ...config, cachingStrategy });
