@@ -1,6 +1,6 @@
 import { Track } from "@spotify/web-api-ts-sdk";
 import "../index.css";
-import AudioPreview from "./PreviewTrack";
+import PreviewAudioPlayer from "./PreviewTrack";
 
 interface PlaylistDisplayProps {
   tracks: Track[];
@@ -16,7 +16,11 @@ function PlaylistDisplay({ tracks }: PlaylistDisplayProps) {
           <picture>
             <img width={300} src={track.album.images[0].url} alt={track.name} />
           </picture>
-          <AudioPreview track={track} />
+          {track.preview_url ? (
+            <PreviewAudioPlayer src={track.preview_url} />
+          ) : (
+            <div className="noPreview">No preview available</div>
+          )}
         </div>
       ))}
     </div>

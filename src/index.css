@@ -3,18 +3,64 @@
   padding: 0;
   box-sizing: border-box;
   font-family: monospace;
+  list-style: none;
+  text-decoration: none;
+  background-color: black;
+  color: rgb(255, 251, 243);
+}
+
+button {
+  cursor: pointer;
+  border: solid 1px white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+}
+
+header {
+  height: 5rem;
+  padding: 0 1rem;
+}
+
+.navItems {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+}
+
+.playlistContainer {
+  padding: 2rem 0rem;
+  display: flex;
+  flex-flow: wrap;
+  gap: 10rem;
+  row-gap: 5rem;
+  justify-content: center;
 }
 
 .trackInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 300px;
 }
 
 .trackName {
-  font-size: 1rem;
+  font-size: 1.8rem;
 }
 
-.previewController {
-  width: 300px;
+.audioPlayer {
+  padding: 1rem 0rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.time {
+  font-size: 1.2rem;
+}
+
+.noPreview {
+  padding: 1rem 0rem;
+  font-size: 1.2rem;
 }
