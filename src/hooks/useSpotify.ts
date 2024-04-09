@@ -1,11 +1,11 @@
 import {
-  AuthorizationCodeWithPKCEStrategy,
   LocalStorageCachingStrategy,
   Scopes,
   SdkOptions,
   SpotifyApi,
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useRef, useState } from "react";
+import AuthorizationCodeWithPKCEStrategy from "../auth/auth";
 
 export function useSpotify(
   clientId: "d4dc4ed96a9747cc95da42119237298b",
