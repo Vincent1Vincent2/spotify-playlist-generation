@@ -11,6 +11,7 @@ import {
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useState } from "react";
 import { useSpotify } from "../hooks/useSpotify";
+import "../index.css";
 import PlaylistDisplay from "./Playlist";
 
 function PlaylistCreator() {

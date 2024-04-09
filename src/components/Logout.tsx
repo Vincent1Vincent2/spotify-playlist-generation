@@ -1,5 +1,6 @@
 import { Scopes } from "@spotify/web-api-ts-sdk";
 import { useSpotify } from "../hooks/useSpotify";
+import "../index.css";
 
 function LogOutButton() {
   const { sdk } = useSpotify(

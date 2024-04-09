@@ -1,6 +1,7 @@
 import { Scopes, User } from "@spotify/web-api-ts-sdk";
 import { useCallback, useEffect, useState } from "react";
 import { useSpotify } from "../hooks/useSpotify";
+import "../index.css";
 
 function Profile() {
   const { sdk, initialized, reinitialize } = useSpotify(

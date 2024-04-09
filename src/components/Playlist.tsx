@@ -1,4 +1,5 @@
 import { Track } from "@spotify/web-api-ts-sdk";
+import "../index.css";
 import AudioPreview from "./PreviewTrack";
 
 interface PlaylistDisplayProps {
@@ -10,11 +11,12 @@ function PlaylistDisplay({ tracks }: PlaylistDisplayProps) {
     <div className="playlistContainer">
       {tracks.map((track) => (
         <div key={track.name} className="trackInfo">
-          <p>{track.name}</p>
-          <AudioPreview track={track} />
+          <p className="trackName">{track.name}</p>
+
           <picture>
-            <img width={200} src={track.album.images[0].url} alt="" />
+            <img width={300} src={track.album.images[0].url} alt={track.name} />
           </picture>
+          <AudioPreview track={track} />
         </div>
       ))}
     </div>
