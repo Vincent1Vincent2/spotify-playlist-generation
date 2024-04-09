@@ -29,12 +29,17 @@ function CreatedPlayList() {
 
   return (
     <div className="createdPlaylist">
-      <h1>Your Playlist is Ready!</h1>
-      <div>
-        <img src={createdPlaylist.images[0].url} alt={createdPlaylist.name} />
-        <h2>{createdPlaylist.name}</h2>
-        <p>{createdPlaylist.description}</p>
+      <div className="playlistContent">
+        <img
+          width={320}
+          src={createdPlaylist.images[0].url}
+          alt={createdPlaylist.name}
+        />
+        <h2 className="playlistName">{createdPlaylist.name}</h2>
+        <p className="playlistDescription">{createdPlaylist.description}</p>
+
         <a
+          className="viewOnSpotify"
           href={createdPlaylist.external_urls.spotify}
           target="_blank"
           rel="noreferrer"

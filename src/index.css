@@ -132,3 +132,26 @@ header {
 .createPlaylistButton:hover {
   background-color: rgb(131, 119, 52);
 }
+
+.createdPlaylist {
+  height: 80svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.playlistContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playlistName {
+  font-size: clamp(0.0625rem, -3.2105rem + 14.9621vw, 3rem);
+  padding: 1rem 0rem;
+}
+
+.viewOnSpotify {
+  margin-top: 2rem;
+}
