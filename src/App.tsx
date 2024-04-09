@@ -10,7 +10,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index path="/api/auth/callback/spotify" element={<Home />} />
+          <Route
+            index
+            path="/spotify-playlist-generation.vercel.app"
+            element={<Home />}
+          />
           <Route path="/playlist" element={<PlaylistCreator />} />
           <Route path="/playlist/:playlistId" element={<CreatedPlayList />} />
           <Route path="*" element={<Navigate to="/" />} />
