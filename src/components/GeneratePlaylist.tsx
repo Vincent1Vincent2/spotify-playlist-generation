@@ -11,6 +11,7 @@ import {
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useState } from "react";
 import { useSpotify } from "../hooks/useSpotify";
+import PlaylistDisplay from "./Playlist";
 
 function PlaylistCreator() {
   const { sdk, initialized } = useSpotify(
@@ -111,16 +112,7 @@ function PlaylistCreator() {
 
   return (
     <main>
-      <div className="playlistContainer">
-        {recommendationsResponse?.tracks.map((track) => (
-          <div key={track.name} className="trackInfo">
-            <p>{track.name}</p>
-            <picture>
-              <img width={200} src={track.album.images[0].url} alt="" />
-            </picture>
-          </div>
-        ))}
-      </div>
+      <PlaylistDisplay tracks={recommendationsResponse?.tracks || []} />
       <div className="generateContainer">
         <h2>Time to vibe!</h2>
         <button className="createPlaylistButton" onClick={createPlaylist}>
