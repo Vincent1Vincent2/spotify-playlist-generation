@@ -120,7 +120,7 @@ function PlaylistCreator() {
   }
 
   if (!initialized || !sdk) {
-    return <p>Welcome!</p>;
+    location.reload();
   }
 
   return (
