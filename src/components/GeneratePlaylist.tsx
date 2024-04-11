@@ -131,7 +131,7 @@ function PlaylistCreator() {
           </button>
           <p className="or">or</p>
 
-          <Link className="createPlaylistButton" to="playlist">
+          <Link className="createPlaylistButton" to="/playlist">
             Request new playlist
           </Link>
         </div>
