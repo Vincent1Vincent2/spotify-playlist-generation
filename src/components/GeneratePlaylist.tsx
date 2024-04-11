@@ -120,7 +120,11 @@ function PlaylistCreator() {
   }
 
   if (!initialized || !sdk) {
-    location.reload();
+    return (
+      <div className="generateContainer">
+        <h2>If no tracks load, reload page</h2>
+      </div>
+    );
   }
 
   return (
