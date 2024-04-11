@@ -10,7 +10,7 @@ import {
   User,
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSpotify } from "../hooks/useSpotify";
 import "../index.css";
 import PlaylistDisplay from "./Playlist";
@@ -115,6 +115,10 @@ function PlaylistCreator() {
     }
   }
 
+  function newTracks() {
+    location.reload();
+  }
+
   if (!initialized || !sdk) {
     return <p>Loading...</p>;
   }
@@ -131,9 +135,9 @@ function PlaylistCreator() {
           </button>
           <p className="or">or</p>
 
-          <Link className="createPlaylistButton" to="/playlist">
+          <button className="createPlaylistButton" onClick={newTracks}>
             Request new playlist
-          </Link>
+          </button>
         </div>
       </div>
     </main>
