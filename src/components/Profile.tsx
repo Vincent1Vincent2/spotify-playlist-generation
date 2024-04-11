@@ -40,18 +40,6 @@ function Profile() {
     }
   }, [initialized, sdk, fetchUserProfile, reinitialize, hasProfileFetched]);
 
-  if (!initialized) {
-    return <p>Welcome!</p>;
-  }
-
-  if (!sdk) {
-    return <p>Welcome!</p>;
-  }
-
-  if (!userName) {
-    return <p>Welcome!</p>;
-  }
-
   return (
     <li>
       <p className="navLink">Hello {userName}!</p>
