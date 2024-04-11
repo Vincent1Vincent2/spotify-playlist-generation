@@ -11,6 +11,7 @@ function LogOutButton() {
 
   function handleLogout() {
     sdk?.logOut();
+    localStorage.clear();
     window.location.reload();
   }
 
