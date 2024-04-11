@@ -120,7 +120,9 @@ function PlaylistCreator() {
   }
 
   function newTracks() {
-    window.location.reload();
+    window.location.replace(
+      "https://spotify-playlist-generation.vercel.app/playlist"
+    );
   }
 
   return (
