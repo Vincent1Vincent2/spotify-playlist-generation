@@ -10,7 +10,7 @@ import {
   User,
 } from "@spotify/web-api-ts-sdk";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSpotify } from "../hooks/useSpotify";
 import "../index.css";
 import PlaylistDisplay from "./Playlist";
@@ -119,12 +119,6 @@ function PlaylistCreator() {
     return <p>Loading...</p>;
   }
 
-  function newTracks() {
-    window.location.replace(
-      "https://spotify-playlist-generation.vercel.app/playlist"
-    );
-  }
-
   return (
     <main>
       <PlaylistDisplay tracks={recommendationsResponse?.tracks || []} />
@@ -136,9 +130,10 @@ function PlaylistCreator() {
             Create Playlist
           </button>
           <p className="or">or</p>
-          <button className="createPlaylistButton" onClick={newTracks}>
+
+          <Link className="createPlaylistButton" to="playlist">
             Request new playlist
-          </button>
+          </Link>
         </div>
       </div>
     </main>
