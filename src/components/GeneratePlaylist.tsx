@@ -120,7 +120,7 @@ function PlaylistCreator() {
   }
 
   if (!initialized || !sdk) {
-    return <p>Loading...</p>;
+    return <p>Welcome!</p>;
   }
 
   return (
