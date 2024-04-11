@@ -1,4 +1,4 @@
-import { Scopes, User } from "@spotify/web-api-ts-sdk";
+import { Scopes } from "@spotify/web-api-ts-sdk";
 import { useCallback, useEffect, useState } from "react";
 import { useSpotify } from "../hooks/useSpotify";
 import "../index.css";
@@ -9,14 +9,17 @@ function Profile() {
     import.meta.env.VITE_REDIRECT_TARGET,
     Scopes.all
   );
-  const [profile, setProfile] = useState<User>();
   const [hasProfileFetched, setHasProfileFetched] = useState(false);
+  const [userName, setUserName] = useState<string | null>(null);
 
   const fetchUserProfile = useCallback(async () => {
     try {
       const user = await sdk?.currentUser.profile();
-      setProfile(user);
       setHasProfileFetched(true);
+      if (user) {
+        localStorage.setItem("user", user.display_name || "");
+        setUserName(user.display_name);
+      }
     } catch (error) {
       console.error("Error fetching user profile:", error);
     }
@@ -28,6 +31,12 @@ function Profile() {
     } else if (!initialized && reinitialize) {
       // If initialization failed and reinitialization is requested, reinitialize the SDK
       reinitialize();
+    } else {
+      // Check if the user's name is already stored in localStorage
+      const storedUserName = localStorage.getItem("user");
+      if (storedUserName) {
+        setUserName(storedUserName);
+      }
     }
   }, [initialized, sdk, fetchUserProfile, reinitialize, hasProfileFetched]);
 
@@ -39,13 +48,13 @@ function Profile() {
     return <p>Welcome!</p>;
   }
 
-  if (!profile) {
+  if (!userName) {
     return <p>Welcome!</p>;
   }
 
   return (
     <li>
-      <p className="navLink">Hello {profile.display_name}!</p>
+      <p className="navLink">Hello {userName}!</p>
     </li>
   );
 }
