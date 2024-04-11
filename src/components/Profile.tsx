@@ -32,15 +32,15 @@ function Profile() {
   }, [initialized, sdk, fetchUserProfile, reinitialize, hasProfileFetched]);
 
   if (!initialized) {
-    return <p>Loading...</p>;
+    return <p>Welcome!</p>;
   }
 
   if (!sdk) {
-    return <p>Failed to initialize Spotify SDK.</p>;
+    return <p>Welcome!</p>;
   }
 
   if (!profile) {
-    return <p>Failed to fetch profile data.</p>;
+    return <p>Welcome!</p>;
   }
 
   return (
